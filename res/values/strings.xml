@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">autos504</string>
+    <string name="enterLicense">Ingrese la Placa:</string>
+    <string name="action_settings">Settings</string>
+    <string name="send_request">Consultar</string>
+    <string name="maker">Fabricante</string>
+    <string name="color">Color</string>
+    <string name="period">Periodo</string>
+    <string name="dei">DEI</string>
+    <string name="municipal">Municipal</string>
+    <string name="send_report">Reportar</string>
+    <string name="license">Placa</string>
+
+</resources>
