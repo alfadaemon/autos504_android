@@ -26,7 +26,8 @@
             android:ems="10"
             android:hint="@string/license"
             android:inputType="textCapCharacters"
-            android:maxLength="7" />
+            android:maxLength="7"
+            android:text="PBZ5667" />
 
         <Button
             android:id="@+id/btnSendRequest"
@@ -36,10 +37,10 @@
             android:text="@string/send_request" />
 
         <TableLayout
-            android:id="@+id/tableLayout1"
+            android:id="@+id/tblLayoutResults"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible" >
+            android:visibility="visible" >
 
             <TableRow
                 android:id="@+id/tableRow1"
@@ -56,7 +57,11 @@
                 <TextView
                     android:id="@+id/lblMakerVal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:minHeight="20dp"
+                    android:minWidth="200dp"
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
@@ -74,7 +79,11 @@
                 <TextView
                     android:id="@+id/lblColorVal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:minHeight="20dp"
+                    android:minWidth="200dp"
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
@@ -93,7 +102,11 @@
                     android:id="@+id/lblPeriodVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2014" />
+                    android:layout_marginLeft="20dp"
+                    android:minHeight="20dp"
+                    android:minWidth="200dp"
+                    android:textStyle="bold" />
+
             </TableRow>
 
             <TableRow
@@ -112,7 +125,11 @@
                     android:id="@+id/lblDEIVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00" />
+                    android:layout_marginLeft="20dp"
+                    android:minHeight="20dp"
+                    android:text="0.00"
+                    android:textStyle="bold" />
+
             </TableRow>
 
             <TableRow
@@ -131,7 +148,11 @@
                     android:id="@+id/lblMunicipalVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00" />
+                    android:layout_marginLeft="20dp"
+                    android:minHeight="20dp"
+                    android:text="0.00"
+                    android:textStyle="bold" />
+
             </TableRow>
 
             <TableRow
@@ -150,7 +171,11 @@
                     android:id="@+id/lblTotalVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00" />
+                    android:layout_marginLeft="20dp"
+                    android:minHeight="20dp"
+                    android:text="0.00"
+                    android:textStyle="bold" />
+
             </TableRow>
         </TableLayout>
 
