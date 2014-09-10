@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -46,49 +47,24 @@ public class MainActivity extends Activity {
 		dei        = (TextView)findViewById(R.id.lblDEIVal);
 		municipal  = (TextView)findViewById(R.id.lblMunicipalVal);
 		total      = (TextView)findViewById(R.id.lblTotalVal);
-		
-		b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				fabricante.setText("");
-				color.setText("");
-				periodo.setText("");
-				dei.setText("");
-				municipal.setText("");
-				
-				if ( license.length()>=7 && license.length()<=9) {
-					url = url+license.getText().toString();
-					
-					new GetInformation().execute();
-					Log.d("Response: ", "> " + jsonStr);
-					if (jsonStr != null) {
-						try {
-							JSONObject jsonObj = new JSONObject(jsonStr);
-							fabricante.setText(jsonObj.get(TAG_MAKER).toString());
-							color.setText(jsonObj.get(TAG_COLOR).toString());
-							periodo.setText(jsonObj.get(TAG_PERIOD).toString());
-							dei.setText(jsonObj.get(TAG_DEI).toString());
-							municipal.setText(jsonObj.get(TAG_MUNICIPAL).toString());
-							
-							/*
-							Float deiVal=Float.parseFloat(jsonObj.get(TAG_DEI).toString());
-							Float muniVal=Float.parseFloat(jsonObj.get(TAG_MUNICIPAL).toString());
-							Float totalVal = deiVal+muniVal;
-							DecimalFormat df = new DecimalFormat("0.00");
-							df.setMaximumFractionDigits(2);
-							total.setText( df.format(totalVal) );
-							*/
-						} catch (JSONException e) {
-							Toast.makeText(MainActivity.this, "Ocurrio un error, por favor intente de nuevo.", Toast.LENGTH_LONG).show();
-							e.printStackTrace();
-						}
-					} else {
-						Toast.makeText(MainActivity.this, "No se logro obtener la informacion, intente de nuevo.", Toast.LENGTH_LONG).show();
-					}
-				}
-			}
-		 });
+		b.setOnClickListener(onClickListener);
 	}
+	
+	private OnClickListener onClickListener = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			fabricante.setText("");
+			color.setText("");
+			periodo.setText("");
+			dei.setText("");
+			municipal.setText("");
+			
+			if ( license.length()>=7 && license.length()<=9) {
+				new GetInformation().execute();
+				Log.d("Response: ", "> " + jsonStr);
+			}
+		}
+	};
 	
 	public class GetInformation extends AsyncTask<Void, Void, Void>{
 		
@@ -99,13 +75,38 @@ public class MainActivity extends Activity {
 		
 		protected Void doInBackground(Void... arg0){
 			ServiceHandler sh = new ServiceHandler();
-			jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
-			//Log.d("Response: ", "> " + jsonStr);	
+			
+			jsonStr = sh.makeServiceCall(url+license.getText().toString(), ServiceHandler.GET);
+			Log.d("Response AsyncTask: ", "> " + jsonStr);	
 			return null;
 		}
 		
 		protected void onPostExecute(Void result){
 			super.onPostExecute(result);
+			if (jsonStr != null) {
+				try {
+					JSONObject jsonObj = new JSONObject(jsonStr);
+					fabricante.setText(jsonObj.get(TAG_MAKER).toString());
+					color.setText(jsonObj.get(TAG_COLOR).toString());
+					periodo.setText(jsonObj.get(TAG_PERIOD).toString());
+					dei.setText(jsonObj.get(TAG_DEI).toString());
+					municipal.setText(jsonObj.get(TAG_MUNICIPAL).toString());
+					
+					/*
+					Float deiVal=Float.parseFloat(jsonObj.get(TAG_DEI).toString());
+					Float muniVal=Float.parseFloat(jsonObj.get(TAG_MUNICIPAL).toString());
+					Float totalVal = deiVal+muniVal;
+					DecimalFormat df = new DecimalFormat("0.00");
+					df.setMaximumFractionDigits(2);
+					total.setText( df.format(totalVal) );
+					*/
+				} catch (JSONException e) {
+					Toast.makeText(MainActivity.this, "Ocurrio un error, por favor intente de nuevo.", Toast.LENGTH_LONG).show();
+					e.printStackTrace();
+				}
+			} else {
+				Toast.makeText(MainActivity.this, "No se logro obtener la informacion, intente de nuevo.", Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 
